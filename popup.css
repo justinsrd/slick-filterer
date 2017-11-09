@@ -1,0 +1,11 @@
+#slickfilter-container {
+    position: absolute;
+    z-index: 500;
+    top: 0;
+    right: 0;
+    background: #363636;
+}
+
+.super-hidden-deal {
+    display: none !important;
+}
