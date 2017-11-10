@@ -1,34 +1,45 @@
-let container = document.createElement('div');
-container.id = 'slickfilter-container';
-let input = document.createElement('input');
-input.id = 'slickfilter-input';
-input.type = 'range';
-input.min = 0;
-input.max = 80;
-input.value = 0;
-input.onchange = ratingChangeHandler;
-container.appendChild(input);
-document.body.appendChild(container);
-
-
-
-function ratingChangeHandler(evt) {
-    const val = evt.target.value;
-    console.log('val', val);
-}
-
+'use strict';
 
 const deals = document.querySelectorAll('.dealitem');
+const DEFAULT_MAX_SLIDER_VAL = 80;
 
-for (var i = 0; i < deals.length; i++) {
-    try {
-        let deal = deals[i];
-        let rating = parseInt(deal.children[0].children[0].children[0].textContent.trim().replace('+', ''));
 
-        if (rating !== 25) {
-            document.getElementById(deal.id).classList.add('super-hidden-deal');
+$.get(chrome.extension.getURL('slickfilter.html'), function(data) {
+    document.getElementById('top_userbar').innerHTML += data;
+    $('#slickfilter-input').attr('max', DEFAULT_MAX_SLIDER_VAL);
+    $('#max').val(DEFAULT_MAX_SLIDER_VAL);
+    setMaxSliderValue();
+    $('#slickfilter-input').on('input', hideDeals);
+    $('#max').on('change', setMaxSliderValue);
+});
+
+
+function hideDeals(evt) {
+    const input = evt.target.value;
+    if (parseInt(input) || input === '0') {
+        $('#display-number').html(input);
+        for (var i = 0; i < deals.length; i++) {
+            try {
+                let deal = deals[i];
+                let rating = parseInt(deal.children[0].children[0].children[0].textContent.trim().replace('+', ''));
+                document.getElementById(deal.id).classList.remove('super-hidden-deal');
+                if (rating < input) {
+                    document.getElementById(deal.id).classList.add('super-hidden-deal');
+                }
+            } catch(e) {
+                
+            }
         }
-    } catch(e) {
-        console.log(e);
+    } else { //if non int is entered
+        setMaxSliderValue();
     }
+    
+}
+
+function setMaxSliderValue(evt) {
+    const maxSliderVal = (evt && parseInt(evt.target.value)) ? evt.target.value : DEFAULT_MAX_SLIDER_VAL;
+    $('#max').val(maxSliderVal);
+    $('#slickfilter-input').val(0);
+    $('#display-number').html(0);
+    $('#slickfilter-input').attr('max', maxSliderVal);
 }

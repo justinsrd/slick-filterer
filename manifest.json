@@ -10,5 +10,8 @@
 			"css": ["popup.css"],
 			"js": ["lib/jquery-3.2.1.min.js", "popup.js"]
 		}
-	]
+	],
+	"web_accessible_resources": [
+       "slickfilter.html"
+     ]
 }

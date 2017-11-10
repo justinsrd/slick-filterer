@@ -4,8 +4,64 @@
     top: 0;
     right: 0;
     background: #363636;
+    height: 39px;
+    display: flex;
+	width: 250px;
+    position: fixed;
+    padding-left: 20px;
+    border-radius: 5px;
+}
+
+
+#slickfilter-max-input {
+	align-items: center;
+	display: flex;
+	margin-right: 8px;
+}
+
+#slickfilter-max-input span {
+	color: #FFF;
+	margin-right: 5px;
+}
+
+#slickfilter-max-input input {
+	align-items: center;
+	height: 40%;
+	width: 25px;
+	border-radius: 3px;
+}
+
+#slickfilter-input {
+	flex-grow: 2;
+}
+
+#slickfilter-max-display {
+	align-items: center;
+	display: flex;
+	width: 25px;
+}
+
+#slickfilter-max-display span {
+	align-items: center;
+	color: #FFF;
 }
 
 .super-hidden-deal {
     display: none !important;
 }
+
+#userbar_td_user_loggedin {
+	visibility: hidden;
+}
+
+#userbar_td_jewels {
+	display: none;
+}
+
+#userbar_td_search {
+	width: 65% !important;
+}
+
+
+
+
