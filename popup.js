@@ -1,11 +1,11 @@
 'use strict';
 
-const deals = document.querySelectorAll('.dealitem');
+const deals = document.querySelectorAll('.frontpage');
 const DEFAULT_MAX_SLIDER_VAL = 80;
 
 
 $.get(chrome.extension.getURL('slickfilter.html'), function(data) {
-    document.getElementById('top_userbar').innerHTML += data;
+    document.getElementById('globalBar').innerHTML += data;
     $('#slickfilter-input').attr('max', DEFAULT_MAX_SLIDER_VAL);
     $('#max').val(DEFAULT_MAX_SLIDER_VAL);
     setMaxSliderValue();
@@ -13,21 +13,23 @@ $.get(chrome.extension.getURL('slickfilter.html'), function(data) {
     $('#max').on('change', setMaxSliderValue);
 });
 
-
 function hideDeals(evt) {
     const input = evt.target.value;
     if (parseInt(input) || input === '0') {
         $('#display-number').html(input);
         for (var i = 0; i < deals.length; i++) {
             try {
-                let deal = deals[i];
-                let rating = parseInt(deal.children[0].children[0].children[0].textContent.trim().replace('+', ''));
-                document.getElementById(deal.id).classList.remove('super-hidden-deal');
+                let dealId = document.querySelectorAll('.frontpage')[i].attributes['data-threadid'].value;
+                let domItem = document.querySelector('.frontpage[data-threadid="' + dealId + '"]');
+                let rating = parseInt(domItem.querySelector('.count').textContent);
+                
+                domItem.classList.remove('super-hidden-deal');
+
                 if (rating < input) {
-                    document.getElementById(deal.id).classList.add('super-hidden-deal');
+                    domItem.classList.add('super-hidden-deal');
                 }
             } catch(e) {
-                
+
             }
         }
     } else { //if non int is entered
