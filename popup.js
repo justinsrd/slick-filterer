@@ -19,6 +19,7 @@ function init() {
         setMaxSliderValue();
         $('#slickfilter-input').on('input', hideDeals);
         $('#max').on('change', setMaxSliderValue);
+        $('#slickfilter-container').css('height', document.getElementById('globalBar').offsetHeight);
     });
 
     function hideDeals(evt) {
@@ -48,7 +49,6 @@ function init() {
         } else { //if non int is entered
             setMaxSliderValue();
         }
-        
     }
 
     function setMaxSliderValue(evt) {
