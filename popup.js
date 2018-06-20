@@ -13,7 +13,7 @@ function init() {
     const DEFAULT_MAX_SLIDER_VAL = 80;
 
     $.get(chrome.extension.getURL('slickfilter.html'), function(data) {
-        document.getElementById('globalBar').innerHTML += data;
+        document.querySelector('#globalBar .inner').innerHTML += data;
         $('#slickfilter-input').attr('max', DEFAULT_MAX_SLIDER_VAL);
         $('#max').val(DEFAULT_MAX_SLIDER_VAL);
         setMaxSliderValue();
