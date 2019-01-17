@@ -1,11 +1,7 @@
 'use strict';
 
 (function haveFeaturedDealsLoadedYet() {
-    if (!document.getElementById('featureDealsAndCoupons')) {
-        window.requestAnimationFrame(haveFeaturedDealsLoadedYet);
-    } else {
-        init();
-    }
+    init();
 })();
 
 function init() {
